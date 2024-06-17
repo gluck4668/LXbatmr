@@ -16,7 +16,7 @@ devtools::load_all()
 
 #----exposure data----------------
 {
-exp_data_dir="data"  # 数据所在的文件夹,or a xlsx file including the id list of exposrue data
+exp_data_dir="meta_id"  # 数据所在的文件夹,or a xlsx file including the id list of exposrue data
 
 #---如果是ieu网站数据（id或本地文件均可）不需要填下面信息；其他来源的数据要填
 snp_exp = "SNP"
@@ -29,7 +29,7 @@ pval_exp = "pval.exposure"
 
 #samplesize_eqtl=265431 #如果表里有，直接用；如果没有，则需要在下载数据时，查看相应信息
 
-clum_p=1e-5
+clum_p=5e-8
 clump_kb=10000
 clump_r2=0.001
 
