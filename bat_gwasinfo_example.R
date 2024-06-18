@@ -12,11 +12,9 @@ gc()
 devtools::load_all()
 
 
-rm(list = ls())
+data_list = "finngen_R10_NAFLD_mr_significant.xlsx" # NA
 
-data_list = NA #"bat_mr_result_significant.xlsx"
-
-data_dir= "NAFLD"  # NA
+data_dir=NA # "info_test" # NA
 
 
 #----------------------------------------

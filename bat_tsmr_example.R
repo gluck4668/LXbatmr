@@ -16,7 +16,7 @@ devtools::load_all()
 
 #----exposure data----------------
 {
-exp_data_dir="meta_list"  # 数据所在的文件夹,or a xlsx file including the id list of exposrue data
+exp_data_dir="test"  # 数据所在的文件夹,or a xlsx file including the id list of exposrue data
 
 #---如果是ieu网站数据（id或本地文件均可）不需要填下面信息；其他来源的数据要填
 snp_exp = "SNP"
@@ -35,15 +35,15 @@ clump_r2=0.001
 
 
 #-----outcome data------------------
-out_data_file="finngen_R10_NAFLD.gz"
+out_data_file="GCST90054782_buildGRCh37.tsv"
 
-snp_out = "rsids"
-beta_out = "beta"
-se_out = "sebeta"
-effect_allele_out = "alt"
-other_allele_out = "ref"
-eaf_out = "af_alt"
-pval_out = "pval"
+snp_out = "variant_id"
+beta_out = "odds_ratio"
+se_out = "hwe_p_value"
+effect_allele_out = "effect_allele"
+other_allele_out = "other_allele"
+eaf_out = "effect_allele_frequency"
+pval_out = "p_value"
 }
 
 
@@ -51,4 +51,9 @@ bat_tsmr(exp_data_dir,snp_exp,beta_exp,se_exp,effect_allele_exp,
         other_allele_exp,eaf_exp,pval_exp,clum_p,clump_kb,clump_r2,
         out_data_file,snp_out,beta_out,se_out,effect_allele_out,
         other_allele_out,eaf_out,pval_out)
+
+#library(data.table)
+#head(fread(out_data_file))
+
+
 
