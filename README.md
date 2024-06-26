@@ -1,2 +1,2 @@
 # LXbatmr
-LXbatmr can batch process the MR analysis
+LXbatmr can batch to process the MR analysis
