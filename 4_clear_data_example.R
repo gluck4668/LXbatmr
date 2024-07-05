@@ -6,7 +6,7 @@ rm(list=ls())
 devtools::load_all()
 
 
-data_dir <- "test gz"
+data_dir <- "test"
 
 {
 snp_exp = "variant_id"
@@ -18,7 +18,7 @@ eaf_exp = "effect_allele_frequency"
 pval_exp = "p_value"
 #---------------------------------
 
-samplesize_info="test gz___gwas_id_info.xlsx" # 先运行：1_gwas_info_example （获取样本数量）
+samplesize_info="s-data_05___gwas_id_info.xlsx" # 先运行：1_gwas_info_example （获取样本数量）
 
 #--------------------------------
 clum_p=1e-5

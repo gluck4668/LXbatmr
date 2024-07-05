@@ -16,7 +16,7 @@ devtools::load_all()
 
 #----exposure data----------------
 {
-exp_data_dir="meta_finngen_R10_NAFLD"  # 数据所在的文件夹
+exp_data_dir="test"  # 数据所在的文件夹
 
 #---暴露数据主要参数，缺一不可------
 snp_exp = "SNP"
@@ -38,16 +38,16 @@ clump_r2=0.001
 
 
 #-----outcome data------------------
-out_data_file="finngen_R10_NAFLD.gz"
+out_data_file="GCST90275044.tsv"
 
 #---结局数据主要参数，缺一不可------
-snp_out = "rsids"
+snp_out = "rs_id"
 beta_out = "beta"
-se_out = "sebeta"
-effect_allele_out = "alt"
-other_allele_out = "ref"
-eaf_out = "af_alt"
-pval_out = "pval"
+se_out = "standard_error"
+effect_allele_out = "effect_allele"
+other_allele_out = "other_allele"
+eaf_out = "effect_allele_frequency"
+pval_out = "p_value"
 }
 
 #----------------------------

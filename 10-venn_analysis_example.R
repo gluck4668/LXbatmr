@@ -9,7 +9,7 @@ library(LXbatmr)
 rm(list=ls())
 gc()
 
-or_dir = "02"
+or_dir = "venn data"
 
 devtools::load_all()
 
