@@ -11,7 +11,7 @@ gc()
 
 or_dir = "venn data"
 
-devtools::load_all()
+# devtools::load_all()
 
 #---------------------
 venn_analysis(or_dir)

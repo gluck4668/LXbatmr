@@ -11,7 +11,7 @@ library(LXbatmr)
 rm(list=ls())
 gc()
 
-devtools::load_all()
+# devtools::load_all()
 
 exp_data_dir <- "test"
 

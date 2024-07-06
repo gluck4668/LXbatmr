@@ -3,8 +3,7 @@ library(LXbatmr)
 
 rm(list=ls())
 
-devtools::load_all()
-
+# devtools::load_all()
 
 data_dir <- "test"
 

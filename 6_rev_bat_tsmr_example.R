@@ -54,9 +54,9 @@ rev_bat_tsmr(exp_data_file,snp_exp,beta_exp,se_exp,effect_allele_exp,
 
 
 #------------------------------------------
-library(data.table)
-head(fread(exp_data_file))
-head(fread(dir(out_data_dir,full.names = T)[1]))
+# library(data.table)
+# head(fread(exp_data_file))
+# head(fread(dir(out_data_dir,full.names = T)[1]))
 
 
 

@@ -12,7 +12,7 @@ gc()
 
 or_dir = "met"
 
-devtools::load_all()
+# devtools::load_all()
 
 #---------------------------------------------------------
 meta_analysis (or_dir)

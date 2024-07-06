@@ -9,12 +9,12 @@ library(LXbatmr)
 rm(list=ls())
 gc()
 
-devtools::load_all()
+# devtools::load_all()
 
 
-data_list = NA # "finngen_R10_NAFLD_mr_significant.xlsx" # NA
+data_list = NA # "The 233 circulating metabolic biomarkers IDs.xlsx" #NA # "finngen_R10_NAFLD_mr_significant.xlsx" # NA
 
-data_dir= "test" # "info_test" # NA
+data_dir= "NAFLD" # "info_test" # NA
 
 
 #----------------------------------------

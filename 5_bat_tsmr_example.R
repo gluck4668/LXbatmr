@@ -10,7 +10,7 @@ library(LXbatmr)
 rm(list=ls())
 gc()
 
-devtools::load_all()
+# devtools::load_all()
 
 #------------Batch processing MR analysis---------------------
 
@@ -58,10 +58,10 @@ bat_tsmr(exp_data_dir,snp_exp,beta_exp,se_exp,effect_allele_exp,
         other_allele_out,eaf_out,pval_out)
 
 #----------------------------
-library(data.table)
+# library(data.table)
 
-head(fread(dir(exp_data_dir)[1]))  # 核对暴露数据“列名称”
-head(fread(out_data_file))         #核对结局数据“列名称”
+# head(fread(dir(exp_data_dir)[1]))  # 核对暴露数据“列名称”
+# head(fread(out_data_file))         #核对结局数据“列名称”
 
 
 
