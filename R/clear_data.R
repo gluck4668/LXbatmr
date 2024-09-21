@@ -111,7 +111,7 @@ sam <- exp_df$samplesize.exposure
 exp_df$R2<-(2*(b^2)*eaf*(1-eaf)/(2*(b^2)*eaf*(1-eaf)+2*sam*(se^2)*eaf*(1-eaf)))
 exp_df$F<-exp_df$R2*(exp_df$sam-2)/(1-exp_df$R2)
 
-file_name <- gsub("[.]","_",idx01) else
+file_name <- gsub("[.]","_",idx01)
 write.csv(exp_df,paste0(dir_file,"/",file_name,".csv"))
 
 p = round(100*x/nrow(exp_list),4)
