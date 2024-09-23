@@ -12,7 +12,9 @@ if(!dir.exists(out_data_dir) | length(dir(out_data_dir))==0)
 inst_packages()
 
 #-------creating dir-----------------------
-dir_file=paste0(exp_data_file," (Rev_bat_mr)_",Sys.Date())
+exp_data_name <- str_extract(exp_data_file,"[^/]+$")
+
+dir_file=paste0(exp_data_name," (Rev_bat_mr)_",Sys.Date())
   if(!dir.exists(dir_file))
     dir.create(dir_file)
 
@@ -27,7 +29,7 @@ if(!not_out_ind=="")
   stop(paste0("'",not_out_ind,"'"," was not in the colnames of outcome data. Please check the outcome data."))
 
 #-------reading exposure data ----------------
-file_type <- tolower(str_extract(exp_data_file,"(?<=\\.)[^\\.]+$"))
+file_type <- tools::file_ext(exp_data_file) # 获取文件扩展名
 
 if(file_type=="txt"){
   tryCatch(exp_df <-read.table(exp_data_file,header = T,sep = "\t"),
@@ -88,7 +90,7 @@ print(paste0("It is number: ",x, " of ",nrow(out_list)))
 
 file_name <- grep(out_list[x,1],dir(out_data_dir),ignore.case = T,value = T)
 
-file_type <- tolower(str_extract(file_name,"(?<=\\.)[^\\.]+$"))
+file_type <-  tools::file_ext(file_name) # 获取文件扩展名
 
 out_data_file <- paste0(out_data_dir,"/",file_name)
 
@@ -176,12 +178,12 @@ print(paste0("......",p,"% was completed......"))
 #-----foreach end----------
 }
 
-write.xlsx(rev_or_all,paste0(dir_file,"/",exp_data_file,"___rev_or_all .xlsx"))
-write.xlsx(rev_or_ivw,paste0(dir_file,"/",exp_data_file,"___rev_or_ivw .xlsx"))
-write.xlsx(rev_or_ivw,paste0(dir_file,"/",exp_data_file,"___rev_or_ivw .xlsx"))
+write.xlsx(rev_or_all,paste0(dir_file,"/",exp_data_name,"___rev_or_all .xlsx"))
+write.xlsx(rev_or_ivw,paste0(dir_file,"/",exp_data_name,"___rev_or_ivw .xlsx"))
+write.xlsx(rev_or_ivw,paste0(dir_file,"/",exp_data_name,"___rev_or_ivw .xlsx"))
 
 if(nrow(rev_or_ivw_significant)>0){
-   write.xlsx(rev_or_ivw_significant,paste0(dir_file,"/",exp_data_file,"___rev_or_ivw_significant.xlsx")) }
+   write.xlsx(rev_or_ivw_significant,paste0(dir_file,"/",exp_data_name,"___rev_or_ivw_significant.xlsx")) }
 
 print(paste0("The MR analysis result can found in the folder of '",dir_file,"' "))
 #-------Rev_bat_tsmr end--------
