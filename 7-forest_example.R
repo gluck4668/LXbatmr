@@ -13,4 +13,4 @@ mr_method=c("Inverse variance weighted","MR Egger")     #选择展示的方法
 # devtools::load_all()
 
 #---------------------------------
-fores_plot(or_file,mr_method)
+forest_plot(or_file,mr_method)
