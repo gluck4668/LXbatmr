@@ -15,7 +15,7 @@ n_meth = length(mr_method)
 cir_txt_sit = 1.3+(n_meth:1)*0.7 # methods 的位置和行距
 
 #----------------------------------------------------------#
-cir_pic (or_file,cir_txt_sit,
+cir_pic (or_file,mr_method,cir_txt_sit,
          gap.degree=35,   # 环形热图开口大小
          start.degree=350, # 开口位置
          track.height=0.2) # 扇形高度
