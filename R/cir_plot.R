@@ -1,6 +1,6 @@
 
 #----------------------------------------------------------#
-cir_pic <- function(or_file,cir_txt_sit,
+cir_pic <- function(or_file,mr_method,cir_txt_sit,
                     gap.degree,
                     start.degree,
                     track.height){
@@ -45,7 +45,7 @@ col_color = colorRamp2(c(0, 0.01, 0.1, 0.5, 1), c("#ff0000", "#ff3300","white", 
 
 #--------
 while (!is.null(dev.list()))   dev.off()
-{
+
 circos.clear()
 circos.par(gap.after=c(20))
 
@@ -70,7 +70,7 @@ circos.heatmap(mat, # 数据矩阵
                track.height = track.height,  # 扇形高度
                bg.border = "black")
 
-}
+
 
 # while (!is.null(dev.list()))   dev.off()
 
