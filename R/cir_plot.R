@@ -13,7 +13,7 @@ if(!dir.exists(dir_or))
    dir.create(dir_or)
 
 #-----reading mr or data---------------
-file_type <- tolower(str_extract(or_file,"(?<=\\.)[^\\.]+$"))
+file_type <- tools::file_ext(or_file)
 
 if(file_type=="txt"){
   tryCatch(or_data <-read.table(or_file,header = T,sep = "\t"),
@@ -45,9 +45,13 @@ col_color = colorRamp2(c(0, 0.01, 0.1, 0.5, 1), c("#ff0000", "#ff3300","white", 
 
 #--------
 while (!is.null(dev.list()))   dev.off()
-{circos.clear()
+{
+circos.clear()
 circos.par(gap.after=c(20))
-png(filename = paste0(dir_or,"/",str_extract(or_file,".*?(?=\\.)"),"_circos_plot.png"),
+
+plotname <- str_extract(or_file,"(?<=/)([^/]+$)") %>% str_extract("(.*?)(?=\\.)")
+
+png(filename = paste0(dir_or,"/",plotname,"_circos_plot.png"),
     width=1200, height=1200,units = "px",res = 150)
 #par(mai = c(0.5, 0.5, 0.5, 0.5)) # 边距 c(bottom, left, top, right)
 
