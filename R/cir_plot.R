@@ -1,6 +1,6 @@
 
 #----------------------------------------------------------#
-cir_pic <- function(or_file,cir_txt_sit,
+cir_pic <- function(or_file,mr_method,cir_txt_sit,
                     gap.degree,
                     start.degree,
                     track.height){
