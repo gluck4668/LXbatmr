@@ -1,6 +1,6 @@
 
 #----------------------------------------------------------#
-cir_pic <- function(or_file,mr_method,cir_txt_sit,
+cir_pic <- function(or_file,cir_txt_sit,
                     gap.degree,
                     start.degree,
                     track.height){
@@ -13,7 +13,7 @@ if(!dir.exists(dir_or))
    dir.create(dir_or)
 
 #-----reading mr or data---------------
-file_type <- tools::file_ext(or_file)
+file_type <- tools::file_ext(or_file) #文件扩展名
 
 if(file_type=="txt"){
   tryCatch(or_data <-read.table(or_file,header = T,sep = "\t"),
@@ -45,13 +45,12 @@ col_color = colorRamp2(c(0, 0.01, 0.1, 0.5, 1), c("#ff0000", "#ff3300","white", 
 
 #--------
 while (!is.null(dev.list()))   dev.off()
-
+{
 circos.clear()
 circos.par(gap.after=c(20))
 
-plotname <- str_extract(or_file,"(?<=/)([^/]+$)") %>% str_extract("(.*?)(?=\\.)")
-
-png(filename = paste0(dir_or,"/",plotname,"_circos_plot.png"),
+file_save <-str_extract(or_file,"(?<=/)[^/]+$") %>% str_extract(".*?(?=\\.)")
+png(filename = paste0(dir_or,"/",file_save,"_circos_plot.png"),
     width=1200, height=1200,units = "px",res = 150)
 #par(mai = c(0.5, 0.5, 0.5, 0.5)) # 边距 c(bottom, left, top, right)
 
@@ -70,7 +69,7 @@ circos.heatmap(mat, # 数据矩阵
                track.height = track.height,  # 扇形高度
                bg.border = "black")
 
-
+}
 
 # while (!is.null(dev.list()))   dev.off()
 
@@ -103,6 +102,7 @@ grid.draw(lgd)
 while (!is.null(dev.list()))   dev.off()
 
 print(paste0("The circos plot can be found in the folder of '",dir_or,"' "))
+
 
 #---------the end-------------
 }

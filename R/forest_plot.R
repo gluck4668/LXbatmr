@@ -1,6 +1,6 @@
 
 
-forest_plot <- function(or_file,mr_method){
+fores_plot <- function(or_file,mr_method){
 
 #--------------------------------------------------------------------
 #---R packages--------
