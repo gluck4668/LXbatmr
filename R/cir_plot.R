@@ -26,9 +26,8 @@ if(file_type=="txt"){
       or_data <- eval(str2expression(paste0("read.",file_type,"('",or_file,"')")))
 }
 
-
+# or_data$method[or_data$method=="Inverse variance weighted"]="IVW"
 or_df <- or_data[(or_data$method %in% mr_method),]
-or_df$method[or_df$method=="Inverse variance weighted"]="IVW"
 
 mat=acast(or_df, id.exposure~method, value.var="pval")
 #mat <- na.omit(mat)
@@ -74,6 +73,7 @@ circos.heatmap(mat, # 数据矩阵
 # while (!is.null(dev.list()))   dev.off()
 
 cn = colnames(mat)
+
 n = length(cn)
 #cir_txt_sit = 0.35+(n:1)*0.2 # methods 的位置和行距
 
@@ -85,13 +85,6 @@ circos.text(rep(CELL_META$cell.xlim[2], n) +
               cex =0.8,  # 字体大小
               adj = c(0, 0.5),
               facing = "inside")
-
-# circos.text(rep(CELL_META$cell.xlim[2], n) +
-#    convert_x(1, "mm"),
-#    0.35+(n:1)*0.2, # methods 的位置和行距
-#	  cn, cex =0.8,  # 字体大小
-#	  adj = c(0, 0.5),
-#	  facing = "inside")
 
 circos.clear()
 
