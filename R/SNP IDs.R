@@ -97,6 +97,8 @@ print (paste0(" The ",x, " of ",length(file_lst), " was completed "))
 
 } #----foreach 01 end----------------------------------
 
+print(paste0("The new GWAS data with SNps can be found in '",file_save,"'. "))
+
 } #----snp_tran end----
 
 
