@@ -10,7 +10,7 @@ rm(list=ls())
 gc()
 
 
-or_dir = "met"
+or_dir = "D:/Desktop/LXbatmr 2024-9-29(v3.21)/OR"
 
 # devtools::load_all()
 
