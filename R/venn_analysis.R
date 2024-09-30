@@ -34,12 +34,12 @@ for(x in or_file_list){
 names(venn_id_list) <- or_list
 
 gg_ven <- ggvenn(venn_id_list,columns = or_list,
-                 stroke_linetype = 1,text_size = 8,stroke_size = 0.5,
-                 show_percentage = T,set_name_size = 6,
+                 stroke_linetype = 1,text_size = 6,stroke_size = 0.5,
+                 show_percentage = T,set_name_size = 4,
                  fill_color = brewer.pal(n=length(names(venn_id_list)),name = "Set3"))
 
 ggsave(filename = paste0(dir_file,"/venn_plot ",Sys.Date(),".png"),plot = gg_ven,
-       width = 1200,height = 1000,units = "px",dpi = 150)
+       width = 800,height = 600,units = "px",dpi = 150)
 
 # int <- get.venn.partitions(venn_id_list) # 取交集
 #  inter_id <- int$..values..[[1]]
