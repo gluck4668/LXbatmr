@@ -82,6 +82,7 @@ meta_analysis(or_df,save_name)
 write.xlsx(or_df,paste0(dir_file,"/meta_plot (negative correlation) ",Sys.Date(),".xlsx"))
 }
 
+print(paste0("The meta analysis result can be found in the folder < ",dir_file," > ."))
 
 }# --the end--
 
