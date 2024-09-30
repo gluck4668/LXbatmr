@@ -6,7 +6,7 @@ rm(list=ls())
 gc()
 
 #-------------
-data_dir = "test"
+data_dir = "D:/Desktop/LXbatmr 2024-9-30(v3.22)/data/noSNP"
 
 file_lst <- dir(data_dir,full.names = T)
 
@@ -14,7 +14,7 @@ file_lst <- dir(data_dir,full.names = T)
 
 chr="chromosome"
 pos_location="base_pair_location"
-buildGRCH="NAFLD_gwas_id_info.xlsx"  # 一般为 buildGRCH37或buildGRCH38
+buildGRCH="D:/Desktop/LXbatmr 2024-9-30(v3.22)/data/noSNP_infor.xlsx"  # 一般为 buildGRCH37或buildGRCH38
 
 
 #------------------------------------------
