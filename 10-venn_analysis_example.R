@@ -9,7 +9,7 @@ library(LXbatmr)
 rm(list=ls())
 gc()
 
-or_dir = "venn data"
+or_dir = "D:/Desktop/LXbatmr 2024-9-29(v3.21)/OR"
 
 # devtools::load_all()
 
