@@ -17,7 +17,8 @@ library(openxlsx)
 
 file_lst <- dir(data_dir,full.names = T)
 
-file_save = paste0(data_dir,"_new ",Sys.Date())
+file_save = paste0(data_dir,"_with_SNPs ",Sys.Date())
+
 if(!dir.exists(file_save))
   dir.create(file_save)
 
@@ -49,7 +50,8 @@ n_chr <- table(chr_df) %>% length() # 查看有多少类Chr
 
 #-----获取buildGRCH基因版本号----
 build <- read.xlsx(buildGRCH) %>% data.frame()
-id <- str_extract(file_lst[x],"(?<=\\/).*?(?=\\.)")
+id <- str_extract(file_lst[x],"(?<=\\/)[^/]+$") %>% substr(1,12)
+
 if(grepl("_",id))
   id <- str_extract(id,".*?(?=_)")
 idx <- grep(id,build[,1])
@@ -89,7 +91,7 @@ foreach(y=c(1:n_chr),.errorhandling = "pass") %do% {
 } #-----foreach 02 end-------
 
 
-fwrite(df_merge, paste0(file_save,"/", str_extract(file_lst[x],"(?<=\\/).*?(?=\\.)"),"_new.gz"))
+fwrite(df_merge, paste0(file_save,"/", id,"_snp.gz"))
 
 print (paste0(" The ",x, " of ",length(file_lst), " was completed "))
 
