@@ -16,7 +16,7 @@ gc()
 
 #----exposure data----------------
 {
-exp_data_dir="D:/Desktop/LXbatmr 2024-9-22(v3.17)/data/exp_excel"  # 数据所在的文件夹
+exp_data_dir="D:/Desktop/LXbatmr 2024-10-07(v3.30)/data/exp_excel"  # 数据所在的文件夹
 
 #---暴露数据主要参数，缺一不可------
 snp_exp = "SNP"
@@ -32,13 +32,13 @@ pval_exp = "pval.exposure"
 samplesize_eqtl=NULL
 
 #----暴露数据筛选和去除连锁不平衡的条件------
-clum_p=5e-8
+clum_p=1e-5
 clump_kb=10000
 clump_r2=0.001
 
 
 #-----outcome data------------------
-out_data_file="D:/Desktop/LXbatmr 2024-9-22(v3.17)/data/outcome/GCST90271622.gz"
+out_data_file="D:/Desktop/LXbatmr 2024-10-07(v3.30)/data/outcome/GCST90271622.gz"
 
 #---结局数据主要参数，缺一不可------
 snp_out = "SNP"
