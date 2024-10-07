@@ -12,26 +12,14 @@ if(!dir.exists(exp_data_dir) | length(dir(exp_data_dir))==0)
 #-----R packages-----------------------
 inst_packages()
 
-#-------------------------------------
-exp_file1 <- fread(dir(exp_data_dir,full.names = T)[1])
-
-exp_ind <- c(snp_exp,beta_exp,se_exp,effect_allele_exp,
-              other_allele_exp,eaf_exp,pval_exp)
-
-not_exp_ind <- paste0(exp_ind[!exp_ind %in% names(exp_file1)],collapse = ", ")
-if(!not_exp_ind=="")
-  stop(paste0("'",not_exp_ind,"'"," was not in the colnames of expousre data. Please check the exposure data."))
-
 #-----creating dir--------------------
-
-out_data_name <- str_extract(out_data_file,"[^/]+$")
+out_data_name <- str_extract(out_data_file,"[^/]+$") %>% str_extract(".*?(?=\\.)")
 
 dir_file=paste0(out_data_name," (bat_mr_results)_",Sys.Date())
   if(!dir.exists(dir_file))
     dir.create(dir_file)
 
 #------reading exposure data list----
-
 if(file.info(exp_data_dir)$isdir) # if it is a directory
 {exp_list <- dir(exp_data_dir) %>% as.data.frame()
   colnames(exp_list)[1] <- "id"
@@ -49,14 +37,6 @@ out_data <- out_data %>% as.data.frame()
 p <- grep(beta_out,names(out_data)) %>% as.numeric()
 out_data[,p] <- log(out_data[,p])}
 }
-
-#-----------------
-out_ind <- c(snp_out,beta_out,se_out,effect_allele_out,
-             other_allele_out,eaf_out,pval_out)
-
-not_out_ind <- paste0(out_ind[!out_ind %in% names(out_data)],collapse = ", ")
-if(!not_out_ind=="")
-  stop(paste0("'",not_out_ind,"'"," was not in the colnames of outcome data. Please check the outcome data."))
 
 #------creating empty data frames----
 mr_all <- data.frame()
@@ -133,7 +113,7 @@ harm_df <- harmonise_data(exposure_dat = exp_df,
                           action=2)
 
 if(exists("harm_df")){
-  harm_df$id.outcome <- str_extract(out_data_file,".*?(?=\\.)")
+  harm_df$id.outcome <- out_data_name
   }
 #-------calculating R2, F,meanF------------------
 #harm_df$R2 <- (2 * (harm_df$beta.exposure^2) * harm_df$eaf.exposure * (1 - harm_df$eaf.exposure)) /
@@ -150,7 +130,7 @@ if(exists("harm_df")){
 #------MR analysis-----------------------------
 #res <- mr(harm_res)
 res <- mr(harm_df)
-res$id.outcome <- str_extract(out_data_file,".*?(?=\\.)")
+res$id.outcome <- out_data_name
 
 res_or_all <- generate_odds_ratios(res) %>% data.frame()
 ivw_sit <- grep("Inverse variance weighted",res_or_all$method,ignore.case = T)
