@@ -12,21 +12,11 @@ if(!dir.exists(out_data_dir) | length(dir(out_data_dir))==0)
 inst_packages()
 
 #-------creating dir-----------------------
-exp_data_name <- str_extract(exp_data_file,"[^/]+$")
+exp_data_name <- str_extract(exp_data_file,"[^/]+$") %>% str_extract(".*?(?=\\.)")
 
 dir_file=paste0(exp_data_name," (Rev_bat_mr)_",Sys.Date())
   if(!dir.exists(dir_file))
     dir.create(dir_file)
-
-#------check outcome data index------------
-out_file1 <- fread(dir(out_data_dir,full.names = T)[1])
-
-out_ind <- c(snp_out,beta_out,se_out,effect_allele_out,
-             other_allele_out,eaf_out,pval_out)
-
-not_out_ind <- paste0(out_ind[!out_ind %in% names(out_file1)],collapse = ", ")
-if(!not_out_ind=="")
-  stop(paste0("'",not_out_ind,"'"," was not in the colnames of outcome data. Please check the outcome data."))
 
 #-------reading exposure data ----------------
 file_type <- tools::file_ext(exp_data_file) # 获取文件扩展名
@@ -40,14 +30,6 @@ if(file_type=="txt"){
     exp_df <- fread(exp_data_file) else
       eval(str2expression(exp_df <- paste0("read.",file_type,"('",exp_data_file,"')")))
      }
-
-#--------------
-exp_ind <- c(snp_exp,beta_exp,se_exp,effect_allele_exp,
-             other_allele_exp,eaf_exp,pval_exp)
-
-not_exp_ind <- paste0(exp_ind[!exp_ind %in% names(exp_df)],collapse = ", ")
-if(!not_exp_ind=="")
-  stop(paste0("'",not_exp_ind,"'"," was not in the colnames of expousre data. Please check the exposure data."))
 
 #------exposure beta and OR transformation---------
 if(!grepl("log",beta_exp,ignore.case = T) | !grepl("ln",beta_exp,ignore.case = T))
@@ -148,8 +130,14 @@ harm_df <- harmonise_data(exposure_dat = exp_df,
 # res <- mr(harm_res)
 res <- mr(harm_df)
 
-res$id.exposure <- exp_data_file
-res$id.outcome <- out_list[x,1]
+res$id.exposure <- exp_data_name
+
+outname <- str_extract(out_list[x,1],".*?(?=\\.)")
+if(any(grepl("_",outname )))
+  outname <- str_extract(outname,".*?(?=_)")
+
+res$id.outcome <- outname
+
 #res$exposure <- "NAFLD"
 #res$outcome <- "Metabolites"
 res <- res %>% dplyr::select(id.exposure,exposure,id.outcome,outcome,
