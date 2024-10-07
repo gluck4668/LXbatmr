@@ -22,7 +22,10 @@ foreach(x=c(1:length(gwas_file)), .errorhandling = "pass") %do% {
 
   df <- fread(gwas_file[x])
 
+  colnames(df)[grep("chr",colnames(df),ignore.case = TRUE)] <- "chromosome"
+
   colnames(df)[which(colnames(df)==chr)] <- "chromosome"
+
   colnames(df)[which(colnames(df)==pos)] <- "base_pair_location"
   colnames(df)[which(colnames(df)==SNP)] <- "variant_id"
   colnames(df)[which(colnames(df)==beta)] <- "beta"
