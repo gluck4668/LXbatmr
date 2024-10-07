@@ -13,11 +13,10 @@ gc()
 
 # devtools::load_all()
 
-gwas_file <- c("D:/Desktop/LXbatmr 2024-10-01(v3.22)/data/exp_gwas/GCST90199631_buildGRCh38.tsv.gz",
-               "D:/Desktop/LXbatmr 2024-10-01(v3.22)/data/exp_gwas/GCST90199634_buildGRCh38.tsv.gz",
-               "D:/Desktop/LXbatmr 2024-10-01(v3.22)/data/exp_gwas/GCST90199645_buildGRCh38.tsv.gz")
+gwas_file <- c("D:/Desktop/LXbatmr 2024-10-06(v3.23)/coloc_data/outcome/finngen_R10_NAFLD.gz"
+               )
 
-chr="chromosome"
+chr="X.chrom"
 pos="base_pair_location"
 SNP="variant_id"
 beta="beta"
