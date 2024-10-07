@@ -16,7 +16,7 @@ gc()
 
 #----exposure data----------------
 {
-exp_data_file="D:/Desktop/LXbatmr 2024-9-29(v3.19)/data/outcome/GCST90271622.gz"  # 暴露数据
+exp_data_file="D:/Desktop/LXbatmr 2024-10-07(v3.33)/data/outcome/GCST90271622.gz"  # 暴露数据
 
 #---暴露数据主要参数------------
 snp_exp = "SNP"
@@ -29,13 +29,13 @@ pval_exp = "p_value"
 
 samplesize_eqtl=265431 #暴露数据样本数
 
-clum_p=5e-8
+clum_p=1e-5
 clump_kb=10000
 clump_r2=0.001
 
 
 #-----outcome data------------------
-out_data_dir="D:/Desktop/LXbatmr 2024-9-29(v3.19)/data/exp_gwas"
+out_data_dir="D:/Desktop/LXbatmr 2024-10-07(v3.33)/data/exp_gwas"
 
 snp_out = "variant_id"
 beta_out = "beta"
