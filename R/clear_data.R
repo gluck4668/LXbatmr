@@ -5,7 +5,6 @@ clear_exp_data <- function(data_dir=data_dir,snp_exp=snp_exp,beta_exp=beta_exp,
                effect_allele_exp=effect_allele_exp,
                other_allele_exp=other_allele_exp,
                eaf_exp=eaf_exp,pval_exp=pval_exp,
-               samplesize_info=samplesize_info,
                clum_p=clum_p,clump_kb=clump_kb,clump_r2=clump_r2) {
 
 #--------
@@ -15,17 +14,6 @@ stop(paste0("The folder '",data_dir,"' was not existed or it was empty, please c
 #-----R packages-----------------------
  inst_packages()
 
-#-------------------------------------
-exp_file1 <- head(fread(dir(data_dir,full.names = T)[1]))
-
-exp_ind <- c(snp_exp,beta_exp,se_exp,effect_allele_exp,
-               other_allele_exp,eaf_exp,pval_exp)
-
-not_exp_ind <- paste0(exp_ind[!exp_ind %in% names(exp_file1)],collapse = ", ")
-if(!not_exp_ind=="")
- stop(paste0("'",not_exp_ind,"'"," was not in the colnames of expousre data. Please check the input parameters."))
-
-rm(exp_file1)
 #-----creating dir--------------------
 dir_file=paste0(data_dir," (cleared result)")
  if(!dir.exists(dir_file))
@@ -36,17 +24,12 @@ exp_list <- dir(data_dir)
 exp_list <- paste0(data_dir,"/",exp_list) %>% data.frame()
 names(exp_list) <- "file_id"
 
-#-------samplesize information ------
-if(file.exists(samplesize_info)){
-   exp_sample_info <- read.xlsx (samplesize_info) %>% data.frame()} else
-  {exp_sample_info <- exp_sample_info (data_dir,samplesize_info) %>% data.frame()}
-
 #-------foreach analysis-----------------------------------------
 foreach(x=c(1:nrow(exp_list)),.errorhandling = "pass") %do% {
 
 print(paste0("It is number ",x," of ", nrow(exp_list)))
 
-file_type <- tolower(str_extract(exp_list[x,1],"(?<=\\.)[^\\.]+$"))
+file_type <-  tools::file_ext(exp_list[x,1])  # 文件扩展名
 
 if(file_type=="txt"){
   tryCatch(exp_df <-read.table(exp_list[x,1],header = T,sep = "\t"),
@@ -95,21 +78,14 @@ if(grepl("_",idx01))
 
 exp_df$id.exposure <- data_id
 
-#------adding samplesize and Trait information-----
-exp_sit <- grep(data_id,exp_sample_info[,1],ignore.case = TRUE)
-exp_sample <- grep("samplesize",names(exp_sample_info),ignore.case = TRUE)[1]
-exp_df$samplesize.exposure <- exp_sample_info[exp_sit,exp_sample]
-exp_trait <- grep("Trait",names(exp_sample_info),ignore.case = TRUE)
-exp_df$Trait <- exp_sample_info[exp_sit,exp_trait]
-
 #----calculating F value-------------
-b <- exp_df$beta.exposure
-eaf <- exp_df$eaf.exposure
-se <- exp_df$se.exposure
-sam <- exp_df$samplesize.exposure
+# b <- exp_df$beta.exposure
+# eaf <- exp_df$eaf.exposure
+# se <- exp_df$se.exposure
+# sam <- exp_df$samplesize.exposure
 
-exp_df$R2<-(2*(b^2)*eaf*(1-eaf)/(2*(b^2)*eaf*(1-eaf)+2*sam*(se^2)*eaf*(1-eaf)))
-exp_df$F<-exp_df$R2*(exp_df$sam-2)/(1-exp_df$R2)
+# exp_df$R2<-(2*(b^2)*eaf*(1-eaf)/(2*(b^2)*eaf*(1-eaf)+2*sam*(se^2)*eaf*(1-eaf)))
+# exp_df$F<-exp_df$R2*(exp_df$sam-2)/(1-exp_df$R2)
 
 file_name <- gsub("[.]","_",idx01)
 write.csv(exp_df,paste0(dir_file,"/",file_name,".csv"))
