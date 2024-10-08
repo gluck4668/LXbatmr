@@ -116,7 +116,11 @@ dev.off()
 }
 
 
+
+
 #--------拆分表格，每个表nrow=50--------------------
+if(nrow(or_df00)>50){
+
 nor <- -floor(-nrow(or_df00)/50) # 向上取整
 
 df_nor <-data.frame(v1=c(50*(0:(nor-1))+1),
@@ -148,6 +152,11 @@ for( k in c(1:nn)){
     or_df= df_list[[k]]
     or_id= id
     plot_forest(or_df,or_id)
+    }
+
+} else
+    { or_id <- str_extract(or_file,"(?<=/)([^/]+$)") %>% str_extract("(.*?)(?=\\.)")
+      plot_forest(or_df,or_id)
     }
 
 
