@@ -112,7 +112,11 @@ harm_df <- harmonise_data(exposure_dat = exp_df,
                           outcome_dat = out_df,
                           action=2)
 
+
+exp_data_name <- str_extract(exp_data_file,"(?<=\\/)[^/]+$") %>% str_extract(".*?(?=\\.)")
+
 if(exists("harm_df")){
+  harm_df$id.exposure <- exp_data_name
   harm_df$id.outcome <- out_data_name
   }
 #-------calculating R2, F,meanF------------------
@@ -130,6 +134,7 @@ if(exists("harm_df")){
 #------MR analysis-----------------------------
 #res <- mr(harm_res)
 res <- mr(harm_df)
+res$id.exposure <- exp_data_name
 res$id.outcome <- out_data_name
 
 res_or_all <- generate_odds_ratios(res) %>% data.frame()
