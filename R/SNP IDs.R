@@ -97,6 +97,8 @@ print (paste0(" The ",x, " of ",length(file_lst), " was completed "))
 
 } #----foreach 01 end----------------------------------
 
+print(paste0("The SNP IDs have been successfully added to the files in the directory '",file_save,"' "))
+
 } #----snp_tran end----
 
 
