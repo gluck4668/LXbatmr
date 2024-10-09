@@ -46,7 +46,7 @@ tm <- forest_theme(base_size = 18,   #图形整体的大小
 
 or_df00 <- or_df
 
-plot_forest <- function(or_df,or_id){
+plot_forest <- function(or_df,mr_method,or_id){
 
 plot <- forestploter::forest(or_df[, c("id.exposure","id.outcome","nsnp","method","pval"," ","OR(95% CI)")],
                              est = or_df$or,
@@ -79,10 +79,12 @@ if(length(pos_bold_pval)>0){
 plot <- add_border(plot, part = "header", row =1,where = "top",gp = gpar(lwd =2))
 plot <- add_border(plot, part = "header", row =1,gp = gpar(lwd =2))
 
+if(length(mr_method)==1 & nrow(or_df)>10){
 if(any(or_df$or>1)){
 or_p <- table(or_df$or>1)["TRUE"] %>% as.numeric()+1
 plot <- add_border(plot, part = "header", row = or_p, gp = gpar(lty =2))
 }
+} # if(length(mr_method)>1) end
 
 or_end <- nrow(or_df)+1
 plot <- add_border(plot, part = "body", row = c(or_end), gp = gpar(lwd =2))
@@ -120,8 +122,6 @@ dev.off()
 }
 
 
-
-
 #--------拆分表格，每个表nrow=50--------------------
 if(nrow(or_df00)>50){
 
@@ -144,7 +144,6 @@ df_list <- df_list[-m]
 }
 
 #--------拆分表格，end------------------------------
-
 or_id_list <- str_extract(or_file,"(?<=/)([^/]+$)") %>% str_extract("(.*?)(?=\\.)")
 
 if(nrow(df_list[[m]])>1 & nrow(df_list[[m]])<5)
@@ -155,12 +154,12 @@ for( k in c(1:nn)){
     id <- paste0(or_id_list,"_0",k,"_")
     or_df= df_list[[k]]
     or_id= id
-    plot_forest(or_df,or_id)
+    plot_forest(or_df,mr_method,or_id)
     }
 
 } else
     { or_id <- str_extract(or_file,"(?<=/)([^/]+$)") %>% str_extract("(.*?)(?=\\.)")
-      plot_forest(or_df,or_id)
+      plot_forest(or_df,mr_method,or_id)
     }
 
 
