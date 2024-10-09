@@ -7,13 +7,17 @@ forest_plot <- function(or_file,mr_method){
 com_packages()
 
 #-----dir-----------
-dir_one <- "forest result"
+dir_one <- paste0("forest result_",Sys.Date())
 if(!dir.exists(dir_one))
   dir.create(dir_one)
 
 #-----------------------------------
 or_df <- read.xlsx(or_file)
-or_df <- or_df[(or_df$method %in% mr_method),] %>% arrange(-or)
+
+if(length(mr_method)>1)
+or_df <- or_df[(or_df$method %in% mr_method),] else
+ or_df <- or_df[(or_df$method %in% mr_method),] %>% arrange(-or)
+
 or_df$method[(or_df$method %in% "Inverse variance weighted")] <- "IVW"
 or_df$pval <- as.numeric(or_df$pval)
 
