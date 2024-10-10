@@ -10,18 +10,39 @@ standard_data <- function(gwas_file=gwas_file,
                           other_allele=other_allele,
                           eaf=eaf){
 
-library(dplyr)
-library(stringr)
-library(data.table)
-library(foreach)
+#------R package------
+inst_packages()
 
+#------read data------
 
 foreach(x=c(1:length(gwas_file)), .errorhandling = "pass") %do% {
+x=1
 
   print(paste0("It is number ",x, " of ",length(gwas_file)))
 
-  df <- fread(gwas_file[x])
+  file_path <- gwas_file[x]
 
+  file_name <- str_extract(file_path,"(?<=\\/)[^/]+$")
+
+
+  if(grepl("vcf.gz",file_name,ignore.case = TRUE)){
+    df <- VariantAnnotation::readVcf(file_path) %>%  # 读取vcf数据
+      gwasglue::gwasvcf_to_TwoSampleMR(type = "exposure")
+
+    } else {
+          if(grepl("vcf",file_name,ignore.case = TRUE)){
+             if(!file.exists("variants.tsv.bgz")){
+               ukbb_url <- "https://broad-ukb-sumstats-us-east-1.s3.amazonaws.com/round2/annotations/variants.tsv.bgz"
+               download.file(ukbb_url,destfile = "variants.tsv.bgz",method = "libcurl" )}
+               ukbb_anno <- fread("variants.tsv.bgz")
+               df <- fread(file_path)
+               df <- inner_join(ukbb_anno,exp_df,by = "variant")
+               rm(ukbb_anno)
+                  } else
+                    df <- fread(file_path)
+       }
+
+  #------standard data------
   colnames(df)[grep("chr",colnames(df),ignore.case = TRUE)] <- "chromosome"
 
   colnames(df)[which(colnames(df)==chr)] <- "chromosome"
@@ -49,7 +70,7 @@ foreach(x=c(1:length(gwas_file)), .errorhandling = "pass") %do% {
 
   colnames(df)[which(colnames(df)==eaf)] <- "effect_allele_frequency"
 
-  fwrite(df, paste0(str_extract(gwas_file[x],".*(?=\\.)"),"_standard.gz"))
+  fwrite(df, paste0(str_extract(file_path,".*(?=\\.)"),"_standard.gz"))
 
   print (paste0(" The ",x, " of ",length(gwas_file), " was completed "))
 
