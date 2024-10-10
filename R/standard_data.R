@@ -26,7 +26,9 @@ foreach(x=c(1:length(gwas_file)), .errorhandling = "pass") %do% {
 
   if(grepl("vcf.gz",file_name,ignore.case = TRUE)){
     df <- VariantAnnotation::readVcf(file_path) %>%  # 读取vcf数据
-      gwasglue::gwasvcf_to_TwoSampleMR(type = "exposure")
+      gwasglue::gwasvcf_to_TwoSampleMR(type = "exposure") %>%
+      as.data.frame()
+    colnames(df) <- sub(".exposure","",colnames(df))
 
     } else {
           if(grepl("vcf",file_name,ignore.case = TRUE)){
