@@ -16,7 +16,6 @@ inst_packages()
 #------read data------
 
 foreach(x=c(1:length(gwas_file)), .errorhandling = "pass") %do% {
-x=1
 
   print(paste0("It is number ",x, " of ",length(gwas_file)))
 
