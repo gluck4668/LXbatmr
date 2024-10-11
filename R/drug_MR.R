@@ -9,8 +9,11 @@ drugMR <- function(target_gene_data=target_gene_data,
                      effect_allele_exp=effect_allele_exp,
                      other_allele_exp=other_allele_exp,
                      eaf_exp=eaf_exp,
+                     pval_exp=pval_exp,
 
                      out_data=out_data,
+                     chr_out=chr_out,
+                     pos_out=pos_out,
                      snp_out=snp_out,
                      beta_out=beta_out,
                      se_out=se_out,
@@ -47,6 +50,7 @@ drugMR_mr_significant <- data.frame()
 drugMR_ivw_significant <- data.frame()
 
 #-----read exposure data file--------------------------------------------------
+library(foreach)
 foreach(x=1:length(exp_files),.errorhandling = "pass") %do% {
 
 print(paste0("Number ",x, " of ",length(exp_files)," exposure data is being processed."))
@@ -162,6 +166,8 @@ out_data <- read_outcome_data(
             snps=exp_snp$SNP,
             filename=out_file,
             sep = ",",
+            chr_col = chr_out,
+            pos_col = pos_out,
             snp_col = "SNP",
             beta_col = beta_out,
             se_col = se_out,
