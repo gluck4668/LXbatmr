@@ -13,10 +13,10 @@ rm(list=ls()) #每次都要运行，以清除内存中旧的数据
 
 {
 
-target_gene_data = "D:/Desktop/LXbatmr 2024-10-11(v3.39)/data/drugMR/target_gene.xlsx"
+target_gene_data = "D:/Desktop/LXbatmr 2024-10-11(v4.0)/data/drugMR/target_gene.xlsx"
 
 #---exposure data---
-exp_data="D:/Desktop/LXbatmr 2024-10-11(v3.39)/data/drugMR/expouse" # 暴露，必填
+exp_data="D:/Desktop/LXbatmr 2024-10-11(v4.0)/data/drugMR/expouse" # 暴露，必填
 
 chr_exp="chromosome"
 pos_exp="base_pair_location"
@@ -30,8 +30,8 @@ pval_exp = "p_value"
 
 
 #---outcome data---
-out_data=c("D:/Desktop/LXbatmr 2024-10-11(v3.39)/data/drugMR/outcome/ieu-a-7.vcf_standard.gz",
-          "D:/Desktop/LXbatmr 2024-10-11(v3.39)/data/drugMR/outcome/GCST90271622_standard.gz") #* 结局，必填
+out_data=c("D:/Desktop/LXbatmr 2024-10-11(v4.0)/data/drugMR/outcome/ieu-a-7.vcf_standard.gz",
+          "D:/Desktop/LXbatmr 2024-10-11(v4.0)/data/drugMR/outcome/GCST90271622_standard.gz") #* 结局，必填
 
 # outcome_name="NAFLD"  # 结局，一般是疾病名称，选填
 
