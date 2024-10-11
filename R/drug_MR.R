@@ -335,8 +335,8 @@ message(paste0("Number ",y, " of ",nrow(target_gene_df)," target genes was doned
 
 } #foreach(y=1:nrow(target_gene_df),.errorhandling = "pass") end
 
-print(paste0("Number ",x, " of ",length(out_files)," exposure data was doned."))
-} #foreach(x=1:length(out_files),.errorhandling = "pass") end
+print(paste0("Number ",x, " of ",length(exp_files)," exposure data was doned."))
+} #foreach(x=1:length(exp_files),.errorhandling = "pass") end
 
 
 #---所有循环end----------------------------------------------------------------
