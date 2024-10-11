@@ -19,7 +19,7 @@ drugMR <- function(target_gene_data=target_gene_data,
                      eaf_out=eaf_out,
                      pval_out=pval_out,
 
-                     pval_exp=pval_exp,
+                     clum_p=clum_p,
                      clump_kb=clump_kb,
                      clump_r2=clump_r2 ){
 
@@ -64,12 +64,12 @@ if(tolower(exp_file_type)=="gz")
 
 #-----筛选exp data-----
 exp_df <- eval(str2expression(paste0("distinct(exp_df,",snp_exp,",.keep_all = T)"))) #snp去重
-exp_df <-eval(str2expression(paste0("subset(exp_df,",pval_exp,"<",exp_p,")"))) #筛选p值
+exp_df <-eval(str2expression(paste0("subset(exp_df,",pval_exp,"<",clum_p,")"))) #筛选p值
 
 if(nrow(exp_df)>0)
-  print(paste0("Note: At the condition of exp_p<",exp_p,", there were ",nrow(exp_df), " SNPs in '",
+  print(paste0("Note: At the condition of exp_p<",clum_p,", there were ",nrow(exp_df), " SNPs in '",
                str_extract(exp_file_x,"(?<=\\/)[^/]+$"),"'.")) else
-    stop(paste0("Note: At the condition of exp_p<",exp_p,", there was no any SNP in '",
+    stop(paste0("Note: At the condition of exp_p<",clum_p,", there was no any SNP in '",
                 str_extract(exp_file_x,"(?<=\\/)[^/]+$"),"'."))
 
 #---save the exp data---
