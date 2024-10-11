@@ -19,11 +19,11 @@ rm(list=ls()) #*每次都要运行，以清除内存中旧的数据
 # pos_exp_start = 74632993
 # pos_exp_end = 74657941
 
-target_gene_data = "D:/Desktop/LXbatmr 2024-10-11(v3.38)/data/drugMR/target_gene.xlsx"
+target_gene_data = "D:/Desktop/LXbatmr 2024-10-11(v3.39)/data/drugMR/target_gene.xlsx"
 
 
 #---exposure data---
-exp_data="D:/Desktop/LXbatmr 2024-10-11(v3.38)/data/drugMR/expouse" # 暴露，必填
+exp_data="D:/Desktop/LXbatmr 2024-10-11(v3.39)/data/drugMR/expouse" # 暴露，必填
 
 # exposure_name="sphingolipid" # 暴露，一般是疾病名称，选填
 
@@ -40,9 +40,9 @@ pval_exp = "p_value"
 
 
 #---outcome data---
-out_data=c("D:/Desktop/LXbatmr 2024-10-11(v3.38)/data/drugMR/outcome/ieu-a-7.vcf_standard.gz",
-          "D:/Desktop/LXbatmr 2024-10-11(v3.38)/data/drugMR/outcome/finngen_R10_NAFLD_standard.gz",
-          "D:/Desktop/LXbatmr 2024-10-11(v3.38)/data/drugMR/outcome/GCST90271622_standard.gz") #* 结局，必填
+out_data=c("D:/Desktop/LXbatmr 2024-10-11(v3.39)/data/drugMR/outcome/ieu-a-7.vcf_standard.gz",
+          "D:/Desktop/LXbatmr 2024-10-11(v3.39)/data/drugMR/outcome/finngen_R10_NAFLD_standard.gz",
+          "D:/Desktop/LXbatmr 2024-10-11(v3.39)/data/drugMR/outcome/GCST90271622_standard.gz") #* 结局，必填
 
 # outcome_name="NAFLD"  # 结局，一般是疾病名称，选填
 
@@ -58,7 +58,7 @@ eaf_out = "effect_allele_frequency"
 pval_out = "p_value"
 
 #---MR parameters---
-exp_p=5e-8        #* 关联性，必填
+clum_p=5e-8        #* 关联性，必填
 clump_kb = 100  #* 连锁不平衡kb, 必填
 clump_r2 = 0.3  #* 连锁不平衡r2,必填
 
@@ -89,7 +89,7 @@ drugMR(target_gene_data=target_gene_data,
          eaf_out=eaf_out,
          pval_out=pval_out,
 
-         pval_exp=pval_exp,
+         clum_p=clum_p,
          clump_kb=clump_kb,
          clump_r2=clump_r2 )
 
