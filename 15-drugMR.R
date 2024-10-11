@@ -31,7 +31,6 @@ pval_exp = "p_value"
 
 #---outcome data---
 out_data=c("D:/Desktop/LXbatmr 2024-10-11(v3.39)/data/drugMR/outcome/ieu-a-7.vcf_standard.gz",
-          "D:/Desktop/LXbatmr 2024-10-11(v3.39)/data/drugMR/outcome/finngen_R10_NAFLD_standard.gz",
           "D:/Desktop/LXbatmr 2024-10-11(v3.39)/data/drugMR/outcome/GCST90271622_standard.gz") #* 结局，必填
 
 # outcome_name="NAFLD"  # 结局，一般是疾病名称，选填
@@ -54,34 +53,36 @@ clump_r2 = 0.3  #* 连锁不平衡r2,必填
 }
 #---run the main function---
 
-# devtools::load_all()
+devtools::load_all()
 
 #-----------------------------------------------
 
-drugMR(  target_gene_data=target_gene_data,
+drugMR (target_gene_data=target_gene_data,
+                   exp_data=exp_data,
+                   chr_exp=chr_exp,
+                   pos_exp=pos_exp,
+                   snp_exp=snp_exp,
+                   beta_exp=beta_exp,
+                   se_exp=se_exp,
+                   effect_allele_exp=effect_allele_exp,
+                   other_allele_exp=other_allele_exp,
+                   eaf_exp=eaf_exp,
+                   pval_exp=pval_exp,
 
-         exp_data=exp_data,
-         chr_exp=chr_exp,
-         pos_exp=pos_exp,
-         snp_exp=snp_exp,
-         beta_exp=beta_exp,
-         se_exp=se_exp,
-         effect_allele_exp=effect_allele_exp,
-         other_allele_exp=other_allele_exp,
-         eaf_exp=eaf_exp,
+                   out_data=out_data,
+                   chr_out=chr_out,
+                   pos_out=pos_out,
+                   snp_out=snp_out,
+                   beta_out=beta_out,
+                   se_out=se_out,
+                   effect_allele_out=effect_allele_out,
+                   other_allele_out=other_allele_out,
+                   eaf_out=eaf_out,
+                   pval_out=pval_out,
 
-         out_data=out_data,
-         snp_out=snp_out,
-         beta_out=beta_out,
-         se_out=se_out,
-         effect_allele_out=effect_allele_out,
-         other_allele_out=other_allele_out,
-         eaf_out=eaf_out,
-         pval_out=pval_out,
-
-         clum_p=clum_p,
-         clump_kb=clump_kb,
-         clump_r2=clump_r2 )
+                   clum_p=clum_p,
+                   clump_kb=clump_kb,
+                   clump_r2=clump_r2 )
 
 
 #---The end--------------------------------------------------------------------
