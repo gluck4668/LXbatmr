@@ -8,7 +8,7 @@ cir_pic <- function(or_file,mr_method,cir_txt_sit,
 com_packages()
 
 #-------------------------------------
-dir_or <- "circos_plot_result"
+dir_or <- paste0("circos_plot_result_",Sys.Date())
 if(!dir.exists(dir_or))
    dir.create(dir_or)
 
@@ -67,6 +67,7 @@ circos.heatmap(mat, # 数据矩阵
                rownames.side = "outside",
                track.height = track.height,  # 扇形高度
                bg.border = "black")
+
 
 }
 

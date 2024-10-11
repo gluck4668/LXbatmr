@@ -33,7 +33,10 @@ if(!dir.exists(dir_save))
 
 #---data information----------------------
 exp_files <- dir(exp_data,full.names = T)
+
 target_gene_df <- read.xlsx(target_gene_data)
+target_gene_df[,2:4] <- lapply(target_gene_df[,2:4],as.numeric)
+
 out_files <- out_data
 
 #-----建立一个空白的dataframe，用于存储结果------------------------------------
@@ -122,6 +125,9 @@ target_gene <- target_y[1,1]
 chr_target <- target_y[1,2]
 pos_start <- target_y[1,3]
 pos_end <- target_y[1,4]
+
+exp_df$chr.exposure <- as.numeric(exp_df$chr.exposure)
+exp_df$pos.exposure <- as.numeric(exp_df$pos.exposure)
 
 target_gene_snp <- subset(exp_df,chr.exposure==chr_target & pos.exposure>pos_start-100000 & pos.exposure<pos_end+100000)
 

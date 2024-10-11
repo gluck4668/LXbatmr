@@ -2,9 +2,9 @@
 inst_packages <- function(){
 
   packs <- c("BiocManager","devtools","remotes","openxlsx","dplyr","readr","utils","meta",
-             "ggplot2","tidyr","stringr","data.table","rlang","coloc","gwasrapidd",
+             "ggplot2","tidyr","stringr","data.table","rlang","coloc","gwasrapidd","purrr",
              "MendelianRandomization","VariantAnnotation","foreach","grid","forestploter",
-             "circlize","reshape2","ComplexHeatmap")
+             "circlize","reshape2","ComplexHeatmap","data.table","VariantAnnotation")
 
   pack_uninst <- packs[!packs %in% installed.packages()[,1]]
 
@@ -12,7 +12,7 @@ inst_packages <- function(){
     tryCatch(install.packages(pack_uninst),error=function(e){e})
     tryCatch(BiocManager::install(pack_uninst),error=function(e){e})}
 
-  mr_packs <- c("ieugwasr","MRInstruments", "TwoSampleMR","gwasvcf","MRPRESSO",
+  mr_packs <- c("ieugwasr","MRInstruments", "TwoSampleMR","gwasvcf","MRPRESSO","RMVMR",
                 "gwasglue","plinkbinr","locuscomparer","geni.plots")
 
   if(!"ieugwasr" %in% installed.packages()[,1]){
@@ -43,6 +43,9 @@ inst_packages <- function(){
 
   if(!"MRPRESSO" %in% installed.packages()[,1])
     remotes::install_github("rondolab/MR-PRESSO")
+
+  if(!"RMVMR" %in% installed.packages()[,1])
+    remotes::install_github("WSpiller/RMVMR")
 
 #---------------------------------
   for(i in c(packs,mr_packs)){
