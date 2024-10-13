@@ -13,14 +13,14 @@ rm(list=ls()) #每次都要运行，以清除内存中旧的数据
 
 {
 
-target_gene_data = "D:/Desktop/LXbatmr 2024-10-12/data/drugMR/target_gene.xlsx"
+target_gene_data = "D:/Desktop/LXbatmr_shiny 2024-10-12/data/didymin target MR/didymin_target_gene.xlsx"
 
 #---exposure data---
-exp_data="D:/Desktop/LXbatmr 2024-10-12/data/drugMR/expouse" # 暴露，必填
+exp_data="D:/Desktop/LXbatmr_shiny 2024-10-12/data/didymin target MR/metabolites" # 暴露，必填
 
 chr_exp="chromosome"
 pos_exp="base_pair_location"
-snp_exp = "variant_id"
+snp_exp = "SNP"
 beta_exp = "beta" #如果有beta,用beta;如果没有，则用OR或者logOR
 se_exp = "standard_error"
 effect_allele_exp = "effect_allele"
@@ -30,8 +30,8 @@ pval_exp = "p_value"
 
 
 #---outcome data---
-out_data=c("D:/Desktop/LXbatmr 2024-10-12/data/drugMR/outcome/ieu-a-7.vcf_standard.gz",
-          "D:/Desktop/LXbatmr 2024-10-12/data/drugMR/outcome/GCST90271622_standard.gz") #* 结局，必填
+out_data=c("D:/Desktop/LXbatmr_shiny 2024-10-12/data/didymin target MR/NAFLD_standard/finngen_R10_NAFLD_standard.gz",
+          "D:/Desktop/LXbatmr_shiny 2024-10-12/data/didymin target MR/NAFLD_standard/GCST90271622_standard.gz") #* 结局，必填
 
 # outcome_name="NAFLD"  # 结局，一般是疾病名称，选填
 

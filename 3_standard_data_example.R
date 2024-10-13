@@ -13,7 +13,8 @@ gc()
 
 # devtools::load_all()
 
-gwas_file <- c("D:/Desktop/LXbatmr 2024-10-06(v3.23)/coloc_data/outcome/finngen_R10_NAFLD.gz"
+gwas_file <- c("D:/Desktop/LXbatmr 2024-10-06(v3.23)/coloc_data/outcome/finngen_R10_NAFLD.gz",
+               "D:/Desktop/LXbatmr 2024-10-10(v3.37)/data/drugMR/expouse/ieu-a-300.vcf.gz"
                )
 
 chr="X.chrom"
@@ -37,4 +38,8 @@ standard_data (gwas_file=gwas_file,
                           effect_allele=effect_allele,
                           other_allele=other_allele,
                           eaf=eaf)
+
+
+
+
 

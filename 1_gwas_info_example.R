@@ -1,7 +1,7 @@
 install.packages("devtools")
 library(devtools)
 
-install_github("gluck4668/LXbatmr")
+install_github("gluck4668/LXbatmr",force = T)
 
 library(LXbatmr)
 

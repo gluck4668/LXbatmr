@@ -16,7 +16,7 @@ gc()
 
 #----exposure data----------------
 {
-exp_data_dir="D:/Desktop/LXbatmr 2024-10-12/data/exp_excel"  # 数据所在的文件夹
+exp_data_dir="D:/Desktop/LXbatmr 2024-10-13/data/exp_excel"  # 数据所在的文件夹
 
 #---暴露数据主要参数，缺一不可------
 snp_exp = "SNP"
@@ -35,8 +35,8 @@ clump_r2=0.001
 
 
 #-----outcome data------------------
-out_data_file=c("D:/Desktop/LXbatmr 2024-10-12/data/outcome/GCST90271622_standard.gz",
-                "D:/Desktop/LXbatmr 2024-10-12/data/outcome/finngen_R10_NAFLD_standard.gz")
+out_data_file=c("D:/Desktop/LXbatmr 2024-10-13/data/outcome/GCST90271622_standard.gz",
+                "D:/Desktop/LXbatmr 2024-10-13/data/outcome/finngen_R10_NAFLD_standard.gz")
 
 #---结局数据主要参数，缺一不可------
 snp_out = "variant_id"

@@ -6,11 +6,11 @@ rm(list=ls())
 
 devtools::load_all()
 
-or_file ="D:/Desktop/LXbatmr 2024-9-23(v3.19)/OR/GCST90271622.gz___outcome_mr_all_significant (1e5).xlsx"
+or_file ="D:/Desktop/LXbatmr 2024-10-09(v3.37)/finngen_R10/finngen_R10_NAFLD_outcome_mr_all_significant.xlsx"
 
-mr_method=c("Inverse variance weighted","MR Egger")     #选择展示的方法
+# mr_method=c("Inverse variance weighted","MR Egger")     #选择展示的方法
 
-# devtools::load_all()
+mr_method=c("Inverse variance weighted")
 
 #---------------------------------
 forest_plot(or_file,mr_method)
