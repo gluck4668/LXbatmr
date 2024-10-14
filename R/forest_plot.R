@@ -46,9 +46,13 @@ tm <- forest_theme(base_size = 18,   #图形整体的大小
 
 or_df00 <- or_df
 
+if(any(grepl("target.gene",colnames(or_df00),ignore.case = T)))
+items <- c("id.exposure","id.outcome","target.gene","nsnp","method","pval"," ","OR(95% CI)") else
+  items <- c("id.exposure","id.outcome","nsnp","method","pval"," ","OR(95% CI)")
+
 plot_forest <- function(or_df,mr_method,or_id){
 
-plot <- forestploter::forest(or_df[, c("id.exposure","id.outcome","nsnp","method","pval"," ","OR(95% CI)")],
+plot <- forestploter::forest(or_df[, items],
                              est = or_df$or,
                              lower = or_df$or_lci95,
                              upper = or_df$or_uci95,
@@ -114,7 +118,7 @@ plot_height <- dplyr::case_when(nrow(or_df) < 10 ~ 1000,
                        )
 
 ggsave(filename = plot_file, plot =plot,
-       width = 1800,height = plot_height,units = "px",dpi = 150 )
+       width = 2400,height = plot_height+20,units = "px",dpi = 150 )
 
 dev.off()
 
