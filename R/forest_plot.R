@@ -1,5 +1,4 @@
 
-
 forest_plot <- function(or_file,mr_method){
 
 #--------------------------------------------------------------------
@@ -13,6 +12,7 @@ if(!dir.exists(dir_one))
 
 #-----------------------------------
 or_df <- read.xlsx(or_file)
+names(or_df) <- tolower(names(or_df))
 
 if(length(mr_method)>1)
 or_df <- or_df[(or_df$method %in% mr_method),] else
@@ -144,6 +144,8 @@ df_list <- df_list[-m]
 }
 
 #--------拆分表格，end------------------------------
+if(length(df_list)>1){
+
 or_id_list <- str_extract(or_file,"(?<=/)([^/]+$)") %>% str_extract("(.*?)(?=\\.)")
 
 if(nrow(df_list[[m]])>1 & nrow(df_list[[m]])<5)
@@ -156,6 +158,14 @@ for( k in c(1:nn)){
     or_id= id
     plot_forest(or_df,mr_method,or_id)
     }
+
+} else # if(length(df_list)>1)  end
+   { or_df= df_list[[1]]
+     or_id <- str_extract(or_file,"(?<=/)([^/]+$)") %>% str_extract("(.*?)(?=\\.)")
+     plot_forest(or_df,mr_method,or_id)
+   }
+
+
 
 } else
     { or_id <- str_extract(or_file,"(?<=/)([^/]+$)") %>% str_extract("(.*?)(?=\\.)")
