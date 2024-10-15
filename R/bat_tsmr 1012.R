@@ -25,6 +25,7 @@ heterogeneity_test <- data.frame()
 pleiotropy_test <- data.frame()
 
 #-------x foreach analysis-----------------------------------------------------
+x=1
 
 foreach(x=c(1:length(exp_list)), .errorhandling = "pass") %do% {
 
@@ -40,7 +41,7 @@ if(file_type=="txt"){
            exp_df <-readr::read_table(exp_list[x],show_col_types = F)}
   } else {
      if(file_type=="gz" | file_type=="tsv")
-        exp_df <- fread(exp_data_file) else
+        exp_df <- fread(exp_list[x]) else
         exp_df <- eval(str2expression(paste0("read.",file_type,"('",exp_list[x],"')")))
         }
 
@@ -84,6 +85,7 @@ exp_df <- format_exposure_data(filename = exp_df,
  exp_df <- exp_df$exp_clum
 
  #----outcome ----------------------------------------------------------------
+ y=1
 
  foreach(y=c(1:length(out_list)), .errorhandling = "pass") %do% {
 
