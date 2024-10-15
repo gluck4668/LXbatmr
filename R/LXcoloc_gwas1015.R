@@ -63,7 +63,7 @@ eqtl_df <- fread(exp_list[x]) %>%
                          eaf.exposure=eaf_eqtl
                          )
 
-head(eqtl_df)
+# head(eqtl_df)
 
 eqtl_df$pval.exposure <- as.numeric(eqtl_df$pval.exposure)  # 转换成数据格式
 eqtl_df$beta.exposure <- as.numeric(eqtl_df$beta.exposure)
@@ -118,6 +118,9 @@ if(!is.na(target_gene_file)){
  eqtl_coloc <- eqtl_df %>%
     subset(chr.exposure==geneChr & pos.exposure>geneStart-100000 & pos.exposure<geneEnd+100000)
 
+#----清除内存中的eqtl_df------
+  rm(eqtl_df)
+
 #------foreach outcome gwas --------------------------------------------
 z=1
 
@@ -136,7 +139,7 @@ foreach(z=c(1:length(out_list)), .errorhandling = "pass") %do% {
                                         eaf.outcome=eaf_gwas
                                        )
 
-   head(gwas_df)
+   # head(gwas_df)
 
    gwas_df$se.outcome <- as.numeric(gwas_df$se.outcome)
    gwas_df$pval.outcome <- as.numeric(gwas_df$pval.outcome)
@@ -161,6 +164,10 @@ foreach(z=c(1:length(out_list)), .errorhandling = "pass") %do% {
 #---outcome data 取共定位区域----
    gwas_coloc <- gwas_df %>%
      subset(chr.outcome==geneChr & pos.outcome>geneStart-100000 & pos.outcome<geneEnd+100000)
+
+#----清空内存中的gwas_df--------
+   rm(gwas_df)
+
 
 #---整合eqtl和gwas数据-------
    overlapping_snps <- intersect(eqtl_coloc$SNP,gwas_coloc$SNP)
