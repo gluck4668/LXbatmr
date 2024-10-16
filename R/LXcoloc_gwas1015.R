@@ -37,7 +37,7 @@ out_list <- outcomeID %>% as.character()
 
 if(!is.na(target_gene_file)){
   target_list <- read.xlsx(target_gene_file)
-}
+  }
 
 #------sample information---------------------------------
 sam_eqtl <- read.xlsx(samplesize_eqtl_file) # 暴露样本数量
@@ -106,20 +106,25 @@ if(!is.na(target_gene_file)){
    geneStart <- pos_target_start
    geneEnd <- pos_target_end
 
+   print(paste0("Number ",y, " of ",target_n," target genes is being processed..."))
+   print(paste0(target_gene,": ",chrpos))
+   print("target_gene_file is existed")
+
    } else {
       top_snp <- eqtl_df %>% dplyr::arrange(pval.exposure) %>% .[1,]
       chrpos <- paste0(top_snp$chr.exposure,":",top_snp$pos.exposure-100000,"-",top_snp$pos.exposure+100000)
       geneChr <- top_snp$chr.exposure
       geneStart <- top_snp$pos.exposure
       geneEnd <- top_snp$pos.exposure
+
+      print(paste0("Number ",y, " of ",target_n," target genes is being processed..."))
+      print(chrpos)
+      print("target_gene_file could not be found.")
   } #--if(!is.na(target_gene_file)) end-----
 
 #---eqtl data 取共定位区域----
  eqtl_coloc <- eqtl_df %>%
     subset(chr.exposure==geneChr & pos.exposure>geneStart-100000 & pos.exposure<geneEnd+100000)
-
-#----清除内存中的eqtl_df------
-  rm(eqtl_df)
 
 #------foreach outcome gwas --------------------------------------------
 z=1
@@ -139,7 +144,7 @@ foreach(z=c(1:length(out_list)), .errorhandling = "pass") %do% {
                                         eaf.outcome=eaf_gwas
                                        )
 
-   # head(gwas_df)
+   head(gwas_df)
 
    gwas_df$se.outcome <- as.numeric(gwas_df$se.outcome)
    gwas_df$pval.outcome <- as.numeric(gwas_df$pval.outcome)
@@ -164,10 +169,6 @@ foreach(z=c(1:length(out_list)), .errorhandling = "pass") %do% {
 #---outcome data 取共定位区域----
    gwas_coloc <- gwas_df %>%
      subset(chr.outcome==geneChr & pos.outcome>geneStart-100000 & pos.outcome<geneEnd+100000)
-
-#----清空内存中的gwas_df--------
-   rm(gwas_df)
-
 
 #---整合eqtl和gwas数据-------
    overlapping_snps <- intersect(eqtl_coloc$SNP,gwas_coloc$SNP)
