@@ -71,9 +71,10 @@ foreach(x=c(1:length(gwas_file)), .errorhandling = "pass") %do% {
 
 
   #--------
-  clump_df <- subset(df,p_value<clum_p) #筛选p值
-
-  fwrite(clump_df, paste0(str_extract(file_path,".*(?=\\.)"),"_ (pval less than ",clum_p,").csv"))
+  if(!is.na(clum_p)){
+    clump_df <- subset(df,p_value<clum_p) #筛选p值
+    fwrite(clump_df, paste0(str_extract(file_path,".*(?=\\.)"),"_ (pval less than ",clum_p,").csv"))
+    }
 
   fwrite(df, paste0(str_extract(file_path,".*(?=\\.)"),"_standard.gz"))
 
