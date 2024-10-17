@@ -8,13 +8,14 @@ standard_data <- function(gwas_file=gwas_file,
                           se=se,
                           effect_allele=effect_allele,
                           other_allele=other_allele,
-                          eaf=eaf){
+                          eaf=eaf,
+                          clum_p=clum_p){
 
 #------R package------
 inst_packages()
 
 #------read data------
-
+x=1
 foreach(x=c(1:length(gwas_file)), .errorhandling = "pass") %do% {
 
   print(paste0("It is number ",x, " of ",length(gwas_file)))
@@ -22,7 +23,6 @@ foreach(x=c(1:length(gwas_file)), .errorhandling = "pass") %do% {
   file_path <- gwas_file[x]
 
   file_name <- str_extract(file_path,"(?<=\\/)[^/]+$")
-
 
   if(grepl("vcf.gz",file_name,ignore.case = TRUE)){
     df <- VariantAnnotation::readVcf(file_path) %>%  # 读取vcf数据
@@ -68,6 +68,12 @@ foreach(x=c(1:length(gwas_file)), .errorhandling = "pass") %do% {
   df$other_allele <- toupper(df$other_allele)
 
   colnames(df)[which(colnames(df)==eaf)] <- "effect_allele_frequency"
+
+
+  #--------
+  clump_df <- subset(df,p_value<clum_p) #筛选p值
+
+  fwrite(clump_df, paste0(str_extract(file_path,".*(?=\\.)"),"_ (pval less than ",clum_p,").csv"))
 
   fwrite(df, paste0(str_extract(file_path,".*(?=\\.)"),"_standard.gz"))
 
