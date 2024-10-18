@@ -21,7 +21,7 @@ x=1
 
 foreach(x=c(1:length(exp_data_name)), .errorhandling = "pass") %do% {
 
-print(paste0("Number: ",x, " of ",length(exp_data_file)," of exposure data is being processed..."))
+print(paste0("Number: ",x, " of ",length(exp_data_file)," exposure data is being processed..."))
 
 file_type <- tools::file_ext(exp_data_file[x]) # 获取文件扩展名
 
@@ -85,7 +85,7 @@ y=1
 
 foreach(y=c(1:length(out_list)), .errorhandling = "pass") %do% {
 
-print(paste0("Number: ",y, " of ",length(out_list)," of outcome data is being processed..."))
+print(paste0("Number: ",y, " of ",length(out_list)," outcome data is being processed..."))
 
 file_type <-  tools::file_ext(out_list[y]) # 获取文件扩展名
 
@@ -171,7 +171,7 @@ if(or_ivw$pval<0.05){
 
 #print(paste0("......Processing ",x, "is done......",  ))
 
-print(paste0("Number: ",x, " of ",length(out_list)," of outcome data was done."))
+print(paste0("Number: ",x, " of ",length(out_list)," outcome data was done."))
 
 
 } #-----y foreach outcome end----------
@@ -183,7 +183,7 @@ if(nrow(rev_or_ivw_significant)>0){
   write.xlsx(rev_or_ivw_significant,paste0(dir_save,"/",exp_file_id,"___rev_or_ivw_significant.xlsx")) }
 
 
-print(paste0("Number: ",x, " of ",length(exp_data_file)," of exposure data was completed."))
+print(paste0("Number: ",x, " of ",length(exp_data_file)," exposure data was completed."))
 
 }# ----x foreach exposure end-----------------------
 
