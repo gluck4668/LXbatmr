@@ -13,20 +13,21 @@ gc()
 
 # devtools::load_all()
 
-gwas_file <- c("D:/Desktop/LXbatmr 2024-10-06(v3.23)/coloc_data/outcome/finngen_R10_NAFLD.gz",
-               "D:/Desktop/LXbatmr 2024-10-10(v3.37)/data/drugMR/expouse/ieu-a-300.vcf.gz"
-               )
+gwas_file <- c("E:/NAFLD/finngen_R10_NAFLD.gz"
+                   )
 
-chr="X.chrom"
-pos="base_pair_location"
-SNP="variant_id"
+chr="#chrom"
+pos="pos"
+SNP="rsids"
 beta="beta"
-pval="p_value"
-se="standard_error"
-effect_allele="effect_allele"
-other_allele="other_allele"
-eaf="effect_allele_frequency"
+pval="pval"
+se="sebeta"
+effect_allele="alt"
+other_allele="ref"
+eaf="af_alt"
 
+clum_p=5e-8
+clum_p=NA
 
 standard_data (gwas_file=gwas_file,
                           chr=chr,
@@ -37,9 +38,10 @@ standard_data (gwas_file=gwas_file,
                           se=se,
                           effect_allele=effect_allele,
                           other_allele=other_allele,
-                          eaf=eaf)
+                          eaf=eaf,
+                          clum_p=clum_p)
 
 
 
 
-
+head(df)

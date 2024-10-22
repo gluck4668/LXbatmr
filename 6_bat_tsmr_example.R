@@ -16,16 +16,16 @@ gc()
 
 #----exposure data----------------
 {
-exp_data_dir="D:/Desktop/LXbatmr_shiny 2024-10-14/data/exp_excel"  # 数据所在的文件夹
+exp_data_dir="D:/Desktop/LXbatmr_shiny 2024-10-14/data/exp_gwas"  # 数据所在的文件夹
 
 #---暴露数据主要参数，缺一不可------
-snp_exp = "SNP"
-beta_exp = "beta.exposure"
-se_exp = "se.exposure"
-effect_allele_exp = "effect_allele.exposure"
-other_allele_exp = "other_allele.exposure"
-eaf_exp = "eaf.exposure"
-pval_exp = "pval.exposure"
+snp_exp = "variant_id"
+beta_exp = "beta"
+se_exp = "standard_error"
+effect_allele_exp = "effect_allele"
+other_allele_exp = "other_allele"
+eaf_exp = "effect_allele_frequency"
+pval_exp = "p_value"
 
 
 #----暴露数据筛选和去除连锁不平衡的条件------

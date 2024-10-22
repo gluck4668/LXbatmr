@@ -16,10 +16,11 @@ gc()
 
 #----exposure data----------------
 {
-exp_data_file="D:/Desktop/LXbatmr 2024-10-07(v3.33)/data/outcome/GCST90271622.gz"  # 暴露数据
+exp_data_file=c("D:/Desktop/LXbatmr_shiny_2024-10-17/data/outcome/GCST90271622_standard.gz",
+               "D:/Desktop/LXbatmr_shiny_2024-10-17/data/outcome/finngen_R10_NAFLD_standard.gz" ) # 暴露数据
 
 #---暴露数据主要参数------------
-snp_exp = "SNP"
+snp_exp = "variant_id"
 beta_exp = "beta"
 se_exp = "standard_error"
 effect_allele_exp = "effect_allele"
@@ -27,15 +28,13 @@ other_allele_exp = "other_allele"
 eaf_exp = "effect_allele_frequency"
 pval_exp = "p_value"
 
-samplesize_eqtl=265431 #暴露数据样本数
-
 clum_p=1e-5
 clump_kb=10000
 clump_r2=0.001
 
 
 #-----outcome data------------------
-out_data_dir="D:/Desktop/LXbatmr 2024-10-07(v3.33)/data/exp_gwas"
+out_data_dir="D:/Desktop/LXbatmr_shiny_2024-10-17/data/exp_gwas"
 
 snp_out = "variant_id"
 beta_out = "beta"
@@ -54,9 +53,9 @@ rev_bat_tsmr(exp_data_file,snp_exp,beta_exp,se_exp,effect_allele_exp,
 
 
 #------------------------------------------
-# library(data.table)
-# head(fread(exp_data_file))
-# head(fread(dir(out_data_dir,full.names = T)[1]))
+ library(data.table)
+ head(fread(exp_data_file[1]))
+ head(fread(dir(out_data_dir,full.names = T)[1]))
 
 
 
