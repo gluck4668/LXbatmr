@@ -122,7 +122,7 @@ circos.text(rep(CELL_META$cell.xlim[2], n) +
 
 circos.clear()
 
-lgd = Legend(title="Pvalue", col_fun=col_color,at = c(0.01, 0.05, 0.1,0.2, 0.3),size = 12)
+lgd = Legend(title="Pvalue", col_fun=col_color,at = c(0.001, 0.01, 0.05,0.1,0.15, 0.2),size = 12)
 grid.draw(lgd)
 
 
