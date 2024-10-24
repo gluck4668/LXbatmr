@@ -27,12 +27,46 @@ if(file_type=="txt"){
 }
 
 # or_data$method[or_data$method=="Inverse variance weighted"]="IVW"
-or_df <- or_data[(or_data$method %in% mr_method),]
+or_df <- or_data[(or_data$method %in% mr_method),] %>% as.data.frame()
 
-mat=acast(or_df, id.exposure~method, value.var="pval")
+head(or_df,3)
+
+x=1
+for(x in 1:nrow(or_df)){
+if(grepl("_",or_df[x,1]))
+  or_df[x,1] <- str_extract(or_df[x,1],".*?(?=_)")
+
+if(grepl("\\.",or_df[x,1]))
+  or_df[x,1] <- str_extract(or_df[x,1],".*?(?=\\.)")
+}
+
+y=1
+for(y in 1:nrow(or_df)){
+  if(grepl("_",or_df[y,2]))
+    or_df[y,2] <- str_extract(or_df[y,2],".*?(?=_)")
+
+  if(grepl("\\.",or_df[y,2]))
+    or_df[y,2] <- str_extract(or_df[y,2],".*?(?=\\.)")
+}
+
+outcome_num <- or_df$id.outcome[!duplicated(or_df$id.outcome)]
+out_list <- list()
+
+library(foreach)
+foreach(x=outcome_num,.errorhandling = "pass") %do% {
+out_list[[x]] <- subset(or_df,id.outcome==x)
+}
+
+#-----foreach(y=outcome_num--------------------------
+foreach(y=outcome_num,.errorhandling = "pass") %do% {
+mat=acast(out_list[[y]], id.exposure~method, value.var="pval")
+
 #mat <- na.omit(mat)
 
-col_color = colorRamp2(c(0, 0.01, 0.1, 0.5, 1), c("#ff0000", "#ff3300","white", "skyblue", "blue"))
+col_color = colorRamp2(c(0.001,0.01, 0.02, 0.05,0.09,
+                         0.1, 0.2,0.5,0.7, 0.9),
+                       c("#ff0000","#ff3300","#ff6600", "#ff9900","#ffff00",
+                         "white", "#00ccff","#0066ff","#0033ff","#0000ff" ))
 
 
 #while (!is.null(dev.list()))   dev.off()
@@ -49,9 +83,10 @@ circos.clear()
 circos.par(gap.after=c(20))
 
 file_save <-str_extract(or_file,"(?<=/)[^/]+$") %>% str_extract(".*?(?=\\.)")
-png(filename = paste0(dir_or,"/",file_save,"_circos_plot.png"),
+png(filename = paste0(dir_or,"/",y,"_circos_plot.png"),
     width=1200, height=1200,units = "px",res = 150)
-#par(mai = c(0.5, 0.5, 0.5, 0.5)) # 边距 c(bottom, left, top, right)
+
+par(mai = c(0.5, 0.5, 0.8, 0.5)) # 边距 c(bottom, left, top, right)
 
 # 设置布局参数
 circos.par(
@@ -67,7 +102,8 @@ circos.heatmap(mat, # 数据矩阵
                rownames.side = "outside",
                track.height = track.height,  # 扇形高度
                bg.border = "black")
-
+# 添加标题
+title( paste0("Circos.heatmap (outcome data: ",y,")"))
 
 }
 
@@ -89,14 +125,22 @@ circos.text(rep(CELL_META$cell.xlim[2], n) +
 
 circos.clear()
 
-lgd = Legend(title="Pvalue", col_fun=col_color)
+lgd = Legend(title="Pvalue", col_fun=col_color,at = c(0.01, 0.05, 0.1,0.2, 0.3),size = 12)
 grid.draw(lgd)
 
 
 while (!is.null(dev.list()))   dev.off()
+
+} # foreach (y) end
+
 
 print(paste0("The circos plot can be found in the folder of '",dir_or,"' "))
 
 
 #---------the end-------------
 }
+
+
+
+
+
