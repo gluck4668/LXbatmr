@@ -29,24 +29,20 @@ if(file_type=="txt"){
 # or_data$method[or_data$method=="Inverse variance weighted"]="IVW"
 or_df <- or_data[(or_data$method %in% mr_method),] %>% as.data.frame()
 
-head(or_df,3)
+for(a in 1:nrow(or_df)){
+if(grepl("_",or_df[a,1]))
+  or_df[a,1] <- str_extract(or_df[a,1],".*?(?=_)")
 
-x=1
-for(x in 1:nrow(or_df)){
-if(grepl("_",or_df[x,1]))
-  or_df[x,1] <- str_extract(or_df[x,1],".*?(?=_)")
-
-if(grepl("\\.",or_df[x,1]))
-  or_df[x,1] <- str_extract(or_df[x,1],".*?(?=\\.)")
+if(grepl("\\.",or_df[a,1]))
+  or_df[a,1] <- str_extract(or_df[a,1],".*?(?=\\.)")
 }
 
-y=1
-for(y in 1:nrow(or_df)){
-  if(grepl("_",or_df[y,2]))
-    or_df[y,2] <- str_extract(or_df[y,2],".*?(?=_)")
+for(b in 1:nrow(or_df)){
+  if(grepl("_",or_df[b,2]))
+    or_df[b,2] <- str_extract(or_df[b,2],".*?(?=_)")
 
-  if(grepl("\\.",or_df[y,2]))
-    or_df[y,2] <- str_extract(or_df[y,2],".*?(?=\\.)")
+  if(grepl("\\.",or_df[b,2]))
+    or_df[b,2] <- str_extract(or_df[b,2],".*?(?=\\.)")
 }
 
 outcome_num <- or_df$id.outcome[!duplicated(or_df$id.outcome)]
@@ -55,6 +51,7 @@ out_list <- list()
 library(foreach)
 foreach(x=outcome_num,.errorhandling = "pass") %do% {
 out_list[[x]] <- subset(or_df,id.outcome==x)
+write.csv(subset(or_df,id.outcome==x),paste0(dir_or,"/",x,"_circos_outcome_data.csv"))
 }
 
 #-----foreach(y=outcome_num--------------------------
