@@ -60,11 +60,15 @@ mat=acast(out_list[[y]], id.exposure~method, value.var="pval")
 
 #mat <- na.omit(mat)
 
-col_color = colorRamp2(c(0.001,0.01, 0.02, 0.05,0.09,
-                         0.1, 0.2,0.5,0.7, 0.9),
-                       c("#ff0000","#ff3300","#ff6600", "#ff9900","#ffff00",
-                         "white", "#00ccff","#0066ff","#0033ff","#0000ff" ))
+# col_color = colorRamp2(c(0.001,0.01, 0.02, 0.05,0.09,
+#                         0.1, 0.2,0.5,0.7, 0.9),
+#                       c("#ff0000","#ff3300","#ff6600", "#ff9900","#ffff00",
+#                         "white", "#00ccff","#0066ff","#0033ff","#0000ff" ))
 
+col_color = colorRamp2(c(0.001,0.01, 0.02, 0.05,0.08,
+                         0.1, 0.15,0.2,0.5),
+                       c("#ff0000","#ff3300","#ff6600", "#ff9900","#ffff00",
+                         "white","#0099ff", "#0066ff","#0000ff" ))
 
 #while (!is.null(dev.list()))   dev.off()
 #circos.clear()
