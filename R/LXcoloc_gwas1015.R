@@ -205,7 +205,7 @@ foreach(z=c(1:length(out_list)), .errorhandling = "pass") %do% {
                     z= merg_data$beta.outcome/merg_data$se.outcome,
                     chr=merg_data$chr.outcome,
                     pos=merg_data$pos.outcome,
-                    id=str_extract(outcomeID,".*(?=\\.)"))
+                    id=id_gwas)
 
    #------共定位分析--------------------------------------------------------
    col_result <- coloc::coloc.abf(dataset1, dataset2)
@@ -292,7 +292,7 @@ foreach(z=c(1:length(out_list)), .errorhandling = "pass") %do% {
    assoc <- Reduce(function(x,y)inner_join(x,y,by="marker"),list(mark,set_01,set_02)) %>%
      data.frame() %>% dplyr::arrange(marker)
 
-   traits=c(dataset1$id[1], str_extract(dataset2$id[1],"(?<=/)[^/]+$"))
+   traits=c(id_exp, id_gwas)
 
    if(is.na(lead_snp))
      highlights= col_data$snp[1] else
