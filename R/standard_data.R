@@ -9,13 +9,15 @@ standard_data <- function(gwas_file=gwas_file,
                           effect_allele=effect_allele,
                           other_allele=other_allele,
                           eaf=eaf,
-                          clum_p=clum_p){
+                          clum_p=clum_p,
+                          write.gz=write.gz){
 
 #------R package------
 inst_packages()
 
 #------read data------
 x=1
+
 foreach(x=c(1:length(gwas_file)), .errorhandling = "pass") %do% {
 
   print(paste0("It is number ",x, " of ",length(gwas_file)))
@@ -69,14 +71,15 @@ foreach(x=c(1:length(gwas_file)), .errorhandling = "pass") %do% {
 
   colnames(df)[which(colnames(df)==eaf)] <- "effect_allele_frequency"
 
-
-  #--------
+  #----------------------------
   if(!is.na(clum_p)){
     clump_df <- subset(df,p_value<clum_p) #筛选p值
     fwrite(clump_df, paste0(str_extract(file_path,".*(?=\\.)"),"_ (pval less than ",clum_p,").csv"))
     }
 
-  fwrite(df, paste0(str_extract(file_path,".*(?=\\.)"),"_standard.gz"))
+  if(write.gz==TRUE){
+    fwrite(df, paste0(str_extract(file_path,".*(?=\\.)"),"_standard.gz"))
+  }
 
   print (paste0(" The ",x, " of ",length(gwas_file), " was completed "))
 
