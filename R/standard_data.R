@@ -44,11 +44,17 @@ foreach(x=c(1:length(gwas_file)), .errorhandling = "pass") %do% {
        }
 
   #------standard data------
+  # ieu下载的数据，有些列名含有".exposure"，因此要去掉
+  if(any(grepl(".exposure",colnames(df),ignore.case = TRUE)))
+       colnames(df) <- gsub(".exposure", "", colnames(df), ignore.case = TRUE)
+
+  #----更名---
   colnames(df)[grep("chr",colnames(df),ignore.case = TRUE)] <- "chromosome"
 
   colnames(df)[which(colnames(df)==chr)] <- "chromosome"
 
   colnames(df)[which(colnames(df)==pos)] <- "base_pair_location"
+
   colnames(df)[which(colnames(df)==SNP)] <- "variant_id"
 
   colnames(df)[which(colnames(df)==beta)] <- "beta"
@@ -61,6 +67,7 @@ foreach(x=c(1:length(gwas_file)), .errorhandling = "pass") %do% {
     }
 
   colnames(df)[which(colnames(df)==pval)] <- "p_value"
+
   colnames(df)[which(colnames(df)==se)] <- "standard_error"
 
   colnames(df)[which(colnames(df)==effect_allele)] <- "effect_allele"
