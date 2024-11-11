@@ -11,23 +11,26 @@ library(LXbatmr)
 rm(list=ls())
 gc()
 
-# devtools::load_all()
+devtools::load_all()
 
-gwas_file <- c("E:/NAFLD/finngen_R10_NAFLD.gz"
+{
+gwas_file <- c("data/ieu/ieu-a-300.vcf.gz"
                    )
 
-chr="#chrom"
+chr="chr"
 pos="pos"
-SNP="rsids"
+SNP="SNP"
 beta="beta"
 pval="pval"
-se="sebeta"
-effect_allele="alt"
-other_allele="ref"
-eaf="af_alt"
+se="se"
+effect_allele="effect_allele"
+other_allele="other_allele"
+eaf="eaf"
 
 clum_p=5e-8
-clum_p=NA
+# clum_p=NA
+
+write.gz=TRUE
 
 standard_data (gwas_file=gwas_file,
                           chr=chr,
@@ -39,9 +42,19 @@ standard_data (gwas_file=gwas_file,
                           effect_allele=effect_allele,
                           other_allele=other_allele,
                           eaf=eaf,
-                          clum_p=clum_p)
+                          clum_p=clum_p,
+                          write.gz=write.gz
+                           )
+
+
+}
+
+
+# library(data.table)
+# head(fread(gwas_file[1]))
 
 
 
 
-head(df)
+
+
