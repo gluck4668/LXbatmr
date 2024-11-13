@@ -22,3 +22,8 @@ cir_pic (or_file,mr_method,cir_txt_sit,
          track.height=0.2) # 扇形高度
 
 
+
+#---------------------------
+gap.degree=35   # 环形热图开口大小
+start.degree=350 # 开口位置
+track.height=0.2
